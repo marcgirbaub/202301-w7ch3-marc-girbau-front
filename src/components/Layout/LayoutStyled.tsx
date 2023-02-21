@@ -3,15 +3,21 @@ import styled from "styled-components";
 const LayoutStyled = styled.div`
   .main-header {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
+    gap: 1rem;
 
     &__title {
       font-family: monospace;
       font-weight: 800;
       font-size: 50px;
-      padding: 0 10px;
     }
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
   }
 `;
 

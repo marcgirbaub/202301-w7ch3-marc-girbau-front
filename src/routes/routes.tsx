@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../components/App/App";
+import CreatePage from "../pages/CreatePage/CreatePage";
 import HomePage from "../pages/HomePage/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 
@@ -13,6 +14,7 @@ export const routes = [
         element: <HomePage />,
       },
       { path: "login", element: <LoginPage /> },
+      { path: "create", element: <CreatePage /> },
     ],
   },
 ];
