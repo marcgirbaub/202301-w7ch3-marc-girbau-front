@@ -1,4 +1,5 @@
 import Form from "../Form/Form";
+import LoginForm from "../LoginForm/LoginForm";
 import RobotsList from "../RobotsList/RobotsList";
 import LayoutStyled from "./LayoutStyled";
 
@@ -11,6 +12,7 @@ const Layout = (): JSX.Element => {
 
       <RobotsList />
       <Form />
+      <LoginForm />
     </LayoutStyled>
   );
 };
