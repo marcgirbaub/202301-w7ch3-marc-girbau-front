@@ -4,13 +4,32 @@ import useUser from "../../hooks/useUser/useUser";
 const LoginForm = (): JSX.Element => {
   const { loginUser } = useUser();
 
-  const [userCredentials, setUserCredentials] = useState({
-    username: "",
-    password: "",
-  });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUsername = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(value);
+  };
+
+  const handlePassword = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(value);
+  };
+
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    loginUser({ username, password });
+
+    setUsername("");
+    setPassword("");
+  };
 
   return (
-    <form>
+    <form onSubmit={onSubmitHandler}>
       <div className="mb-3">
         <label htmlFor="unsername" className="form-label">
           Username
@@ -19,7 +38,8 @@ const LoginForm = (): JSX.Element => {
           type="unsername"
           className="form-control"
           id="unsername"
-          value={userCredentials.username}
+          onChange={handleUsername}
+          value={username}
         />
       </div>
       <div className="mb-3">
@@ -30,7 +50,8 @@ const LoginForm = (): JSX.Element => {
           type="password"
           className="form-control"
           id="password"
-          value={userCredentials.password}
+          onChange={handlePassword}
+          value={password}
         />
       </div>
       <button type="submit" className="btn btn-primary">
