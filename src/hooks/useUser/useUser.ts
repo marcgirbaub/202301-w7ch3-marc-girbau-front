@@ -5,6 +5,7 @@ import {
   logoutUserActionCreator,
 } from "../../store/features/userSlice/userSlice";
 import { useAppDispatch } from "../../store/hooks";
+import useToken from "../useToken/useToken";
 import { CustomTokenPayload, LoginResponse, UserCredentials } from "./types";
 
 interface UseUserStructure {
@@ -14,6 +15,8 @@ interface UseUserStructure {
 
 const useUser = (): UseUserStructure => {
   const dispatch = useAppDispatch();
+
+  const { removeToken } = useToken();
 
   const apiUrl = process.env.REACT_APP_URL_API_LOGIN;
   const usersEndpoint = "/users";
@@ -43,6 +46,7 @@ const useUser = (): UseUserStructure => {
   };
 
   const logoutUser = () => {
+    removeToken();
     dispatch(logoutUserActionCreator());
   };
 
