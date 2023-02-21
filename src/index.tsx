@@ -3,7 +3,6 @@ import { RouterProvider } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-import App from "./components/App/App";
 import GlobalStyles from "./styles/GlobalStyles";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { router } from "./routes/routes";
