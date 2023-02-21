@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import Wrapper from "../../mocks/Wrapper";
 import App from "./App";
@@ -10,7 +11,8 @@ describe("Given an App component", () => {
       render(
         <Wrapper>
           <App />
-        </Wrapper>
+        </Wrapper>,
+        { wrapper: BrowserRouter }
       );
 
       const expectedHeadingText = screen.getByRole("heading", {

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Wrapper from "../mocks/Wrapper";
+import Wrapper from "../../mocks/Wrapper";
 import HomePage from "./HomePage";
 
 describe("Given a HomePage component", () => {
