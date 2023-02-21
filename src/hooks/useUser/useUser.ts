@@ -1,0 +1,44 @@
+import decodeToken from "jwt-decode";
+import { User } from "../../store/features/userSlice/types";
+import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
+import { useAppDispatch } from "../../store/hooks";
+import { CustomTokenPayload, LoginResponse, UserCredentials } from "./types";
+
+interface UseUserStructure {
+  loginUser: (userCredentials: UserCredentials) => Promise<void>;
+}
+
+const useUser = (): UseUserStructure => {
+  const dispatch = useAppDispatch();
+
+  const apiUrl = process.env.REACT_APP_URL_API_LOGIN;
+  const usersEndpoint = "/users";
+  const loginEndpoint = "/login";
+
+  const loginUser = async (userCredentials: UserCredentials) => {
+    const response = await fetch(`${apiUrl}${usersEndpoint}${loginEndpoint}`, {
+      method: "POST",
+      body: JSON.stringify(userCredentials),
+      headers: { "Content-type": "application/json" },
+    });
+
+    const { token } = (await response.json()) as LoginResponse;
+
+    const tokenPayload: CustomTokenPayload = decodeToken(token);
+
+    const { id, username } = tokenPayload;
+
+    const logginUser: User = {
+      username,
+      token,
+      id,
+    };
+
+    dispatch(loginUserActionCreator(logginUser));
+    localStorage.setItem("token", token);
+  };
+
+  return { loginUser };
+};
+
+export default useUser;
