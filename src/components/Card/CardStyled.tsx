@@ -38,6 +38,8 @@ const CardStyled = styled.article`
   .buttons {
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
 
     &__delete {
       :hover {
