@@ -23,39 +23,31 @@ const Layout = (): JSX.Element => {
         <nav>
           <ul className="main-header__nav nav">
             <li>
-              <Link to={"/"}>
-                <a href="home" type="button" className="btn btn-secondary">
-                  Home
-                </a>
+              <Link to={"/"} type="button" className="btn btn-secondary">
+                Home
               </Link>
             </li>
             <li>
-              <Link to={"create"}>
-                <a href="create" type="button" className="btn btn-success">
-                  Create
-                </a>
+              <Link to={"create"} type="button" className="btn btn-success">
+                Create
               </Link>
             </li>
             {!isLogged && (
               <li>
-                <Link to={"login"}>
-                  <a href="login" type="button" className="btn btn-primary">
-                    Login
-                  </a>
+                <Link to={"login"} type="button" className="btn btn-primary">
+                  Login
                 </Link>
               </li>
             )}
             {isLogged && (
               <li>
-                <Link to={"login"}>
-                  <a
-                    href="login"
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={logoutUser}
-                  >
-                    Logout
-                  </a>
+                <Link
+                  to={"login"}
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={logoutUser}
+                >
+                  Logout
                 </Link>
               </li>
             )}
