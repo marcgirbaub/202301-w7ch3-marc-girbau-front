@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import decodeToken from "jwt-decode";
 import { useCallback } from "react";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { CustomTokenPayload } from "../useUser/types";
 
 interface UseTokenStructure {
@@ -11,6 +12,8 @@ interface UseTokenStructure {
 
 const useToken = (): UseTokenStructure => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { isLogged } = useAppSelector((state) => state.user);
 
   const getToken = useCallback(() => {
     const token = localStorage.getItem("token");
@@ -20,7 +23,11 @@ const useToken = (): UseTokenStructure => {
 
       dispatch(loginUserActionCreator({ token, id, username }));
     }
-  }, [dispatch]);
+
+    if (!isLogged) {
+      navigate("/login");
+    }
+  }, [dispatch, isLogged, navigate]);
 
   const removeToken = () => {
     localStorage.removeItem("token");
