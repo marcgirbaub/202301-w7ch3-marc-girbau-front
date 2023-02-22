@@ -7,7 +7,7 @@ import {
 import { useAppDispatch } from "../../store/hooks";
 import useToken from "../useToken/useToken";
 import { CustomTokenPayload, LoginResponse, UserCredentials } from "./types";
-import { showErrorModal } from "../../modals/modals";
+import { showErrorModal, showSuccessModal } from "../../modals/modals";
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;
@@ -48,6 +48,7 @@ const useUser = (): UseUserStructure => {
 
       dispatch(loginUserActionCreator(logginUser));
       localStorage.setItem("token", token);
+      showSuccessModal("Login successful");
     } catch (error) {
       showErrorModal("Invalid credentials");
     }

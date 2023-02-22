@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import useToken from "../../hooks/useToken/useToken";
@@ -40,6 +41,7 @@ const Layout = (): JSX.Element => {
           </ul>
         </nav>
       </header>
+      <ToastContainer hideProgressBar />
       <Outlet />
     </LayoutStyled>
   );

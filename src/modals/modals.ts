@@ -11,3 +11,15 @@ export const showErrorModal = (message: string) => {
     progress: undefined,
   });
 };
+
+export const showSuccessModal = (message: string): void => {
+  toast.success(message, {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
