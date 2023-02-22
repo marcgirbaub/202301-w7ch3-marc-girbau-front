@@ -3,9 +3,14 @@ import { useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import useToken from "../../hooks/useToken/useToken";
 import LayoutStyled from "./LayoutStyled";
+import { useAppSelector } from "../../store/hooks";
+import useUser from "../../hooks/useUser/useUser";
 
 const Layout = (): JSX.Element => {
   const { getToken } = useToken();
+  const { logoutUser } = useUser();
+
+  const { isLogged } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     getToken();
@@ -19,25 +24,41 @@ const Layout = (): JSX.Element => {
           <ul className="main-header__nav nav">
             <li>
               <Link to={"/"}>
-                <button type="button" className="btn btn-secondary">
+                <a href="home" type="button" className="btn btn-secondary">
                   Home
-                </button>
+                </a>
               </Link>
             </li>
             <li>
               <Link to={"create"}>
-                <button type="button" className="btn btn-success">
+                <a href="create" type="button" className="btn btn-success">
                   Create
-                </button>
+                </a>
               </Link>
             </li>
-            <li>
-              <Link to={"login"}>
-                <button type="button" className="btn btn-primary">
-                  Login
-                </button>
-              </Link>
-            </li>
+            {!isLogged && (
+              <li>
+                <Link to={"login"}>
+                  <a href="login" type="button" className="btn btn-primary">
+                    Login
+                  </a>
+                </Link>
+              </li>
+            )}
+            {isLogged && (
+              <li>
+                <Link to={"login"}>
+                  <a
+                    href="login"
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={logoutUser}
+                  >
+                    Logout
+                  </a>
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </header>
