@@ -7,6 +7,7 @@ import {
 import { useAppDispatch } from "../../store/hooks";
 import useToken from "../useToken/useToken";
 import { CustomTokenPayload, LoginResponse, UserCredentials } from "./types";
+import { showErrorModal } from "../../modals/modals";
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;
@@ -23,26 +24,33 @@ const useUser = (): UseUserStructure => {
   const loginEndpoint = "/login";
 
   const loginUser = async (userCredentials: UserCredentials) => {
-    const response = await fetch(`${apiUrl}${usersEndpoint}${loginEndpoint}`, {
-      method: "POST",
-      body: JSON.stringify(userCredentials),
-      headers: { "Content-type": "application/json" },
-    });
+    try {
+      const response = await fetch(
+        `${apiUrl}${usersEndpoint}${loginEndpoint}`,
+        {
+          method: "POST",
+          body: JSON.stringify(userCredentials),
+          headers: { "Content-type": "application/json" },
+        }
+      );
 
-    const { token } = (await response.json()) as LoginResponse;
+      const { token } = (await response.json()) as LoginResponse;
 
-    const tokenPayload: CustomTokenPayload = decodeToken(token);
+      const tokenPayload: CustomTokenPayload = decodeToken(token);
 
-    const { id, username } = tokenPayload;
+      const { id, username } = tokenPayload;
 
-    const logginUser: User = {
-      username,
-      token,
-      id,
-    };
+      const logginUser: User = {
+        username,
+        token,
+        id,
+      };
 
-    dispatch(loginUserActionCreator(logginUser));
-    localStorage.setItem("token", token);
+      dispatch(loginUserActionCreator(logginUser));
+      localStorage.setItem("token", token);
+    } catch (error) {
+      showErrorModal("Invalid credentials");
+    }
   };
 
   const logoutUser = () => {

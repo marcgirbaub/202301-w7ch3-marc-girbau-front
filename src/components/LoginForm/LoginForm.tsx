@@ -22,10 +22,10 @@ const LoginForm = (): JSX.Element => {
     setPassword(value);
   };
 
-  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    loginUser({ username, password });
+    await loginUser({ username, password });
 
     setUsername("");
     setPassword("");
