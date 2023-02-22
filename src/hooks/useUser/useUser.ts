@@ -1,4 +1,5 @@
 import decodeToken from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 import { User } from "../../store/features/userSlice/types";
 import {
   loginUserActionCreator,
@@ -7,7 +8,11 @@ import {
 import { useAppDispatch } from "../../store/hooks";
 import useToken from "../useToken/useToken";
 import { CustomTokenPayload, LoginResponse, UserCredentials } from "./types";
-import { showErrorModal, showSuccessModal } from "../../modals/modals";
+import {
+  showErrorModal,
+  showLogoutSuccessModal,
+  showSuccessModal,
+} from "../../modals/modals";
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;
@@ -18,6 +23,8 @@ const useUser = (): UseUserStructure => {
   const dispatch = useAppDispatch();
 
   const { removeToken } = useToken();
+
+  const navigate = useNavigate();
 
   const apiUrl = process.env.REACT_APP_URL_API_LOGIN;
   const usersEndpoint = "/users";
@@ -49,6 +56,7 @@ const useUser = (): UseUserStructure => {
       dispatch(loginUserActionCreator(logginUser));
       localStorage.setItem("token", token);
       showSuccessModal("Login successful");
+      navigate("/");
     } catch (error) {
       showErrorModal("Invalid credentials");
     }
@@ -57,6 +65,7 @@ const useUser = (): UseUserStructure => {
   const logoutUser = () => {
     removeToken();
     dispatch(logoutUserActionCreator());
+    showLogoutSuccessModal();
   };
 
   return { loginUser, logoutUser };

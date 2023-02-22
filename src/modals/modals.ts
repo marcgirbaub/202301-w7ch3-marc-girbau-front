@@ -23,3 +23,10 @@ export const showSuccessModal = (message: string): void => {
     progress: undefined,
   });
 };
+
+export const showLogoutSuccessModal = () => {
+  toast.success("You have successfully logged out.", {
+    position: "top-center",
+    autoClose: 2000,
+  });
+};

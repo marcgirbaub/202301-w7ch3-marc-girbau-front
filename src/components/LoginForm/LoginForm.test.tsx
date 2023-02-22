@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import Wrapper from "../../mocks/Wrapper";
 import LoginForm from "./LoginForm";
@@ -10,7 +11,8 @@ describe("Given a LoginForm component", () => {
       render(
         <Wrapper>
           <LoginForm />
-        </Wrapper>
+        </Wrapper>,
+        { wrapper: BrowserRouter }
       );
 
       const expectedText = screen.getByRole("heading", {
@@ -27,7 +29,8 @@ describe("Given a LoginForm component", () => {
       render(
         <Wrapper>
           <LoginForm />
-        </Wrapper>
+        </Wrapper>,
+        { wrapper: BrowserRouter }
       );
 
       const expectedButtonText = screen.getByRole("button", {
