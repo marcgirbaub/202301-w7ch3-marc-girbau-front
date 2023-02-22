@@ -5,7 +5,7 @@ const LoginPageStyled = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 100vw;
-  height: 70vh;
+  height: 60vh;
 `;
 
 export default LoginPageStyled;
