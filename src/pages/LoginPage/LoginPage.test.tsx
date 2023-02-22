@@ -22,8 +22,8 @@ describe("Given a Loginpage component", () => {
       expect(loginFormTitle).toBeInTheDocument();
     });
 
-    test("Then it should show a button `Submit`", () => {
-      const expectedButton = "Submit";
+    test("Then it should show a button `Log in`", () => {
+      const expectedButton = "Log in";
       render(
         <Wrapper>
           <LoginPage></LoginPage>

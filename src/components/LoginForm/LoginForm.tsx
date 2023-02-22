@@ -8,6 +8,8 @@ const LoginForm = (): JSX.Element => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const areFieldsEmpty = username === "" || password === "";
+
   const handleUsername = ({
     target: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,8 +58,12 @@ const LoginForm = (): JSX.Element => {
           value={password}
         />
       </div>
-      <button type="submit" className="btn btn-primary">
-        Submit
+      <button
+        type="submit"
+        className="btn btn-primary"
+        disabled={areFieldsEmpty}
+      >
+        Log in
       </button>
     </LoginFormStyled>
   );
