@@ -18,12 +18,12 @@ describe("Given a user reducer", () => {
       const user: User = {
         username: "marc",
         token: "asdgfsfdgdsfhgdfghdfgh",
-        id: "12345asdf",
+        id: "",
       };
       const expectedUserState: UserState = {
         username: "marc",
         token: "asdgfsfdgdsfhgdfghdfgh",
-        id: "12345asdf",
+        id: "",
         isLogged: true,
       };
       const logingUserAction = loginUserActionCreator(user);
