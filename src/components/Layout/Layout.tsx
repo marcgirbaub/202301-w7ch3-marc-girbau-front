@@ -1,7 +1,15 @@
+import { useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
+import useToken from "../../hooks/useToken/useToken";
 import LayoutStyled from "./LayoutStyled";
 
 const Layout = (): JSX.Element => {
+  const { getToken } = useToken();
+
+  useEffect(() => {
+    getToken();
+  }, [getToken]);
+
   return (
     <LayoutStyled>
       <header className="main-header">
