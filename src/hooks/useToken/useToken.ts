@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import decodeToken from "jwt-decode";
 import { useCallback } from "react";
 import { loginUserActionCreator } from "../../store/features/userSlice/userSlice";
@@ -11,6 +12,7 @@ interface UseTokenStructure {
 
 const useToken = (): UseTokenStructure => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const getToken = useCallback(() => {
     const token = localStorage.getItem("token");
@@ -20,7 +22,11 @@ const useToken = (): UseTokenStructure => {
 
       dispatch(loginUserActionCreator({ token, id, username }));
     }
-  }, [dispatch]);
+
+    if (!token) {
+      navigate("/login");
+    }
+  }, [dispatch, navigate]);
 
   const removeToken = () => {
     localStorage.removeItem("token");

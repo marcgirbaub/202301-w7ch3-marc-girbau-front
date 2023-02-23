@@ -22,20 +22,17 @@ const Layout = (): JSX.Element => {
         <h1 className="main-header__title">Robots</h1>
         <nav>
           <ul className="main-header__nav nav">
-            <li>
-              <Link to={"/"} type="button" className="btn btn-secondary">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to={"create"} type="button" className="btn btn-success">
-                Create
-              </Link>
-            </li>
-            {!isLogged && (
+            {isLogged && (
               <li>
-                <Link to={"login"} type="button" className="btn btn-primary">
-                  Login
+                <Link to={"/"} type="button" className="btn btn-secondary">
+                  Home
+                </Link>
+              </li>
+            )}
+            {isLogged && (
+              <li>
+                <Link to={"create"} type="button" className="btn btn-success">
+                  Create
                 </Link>
               </li>
             )}
